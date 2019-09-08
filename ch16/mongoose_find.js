@@ -38,7 +38,7 @@ portfinder.getPort({
 });
 
 var mongoose = require('mongoose');
-const dbURI = 'mongodb://localhost:8081/brokerme';
+const dbURI = 'mongodb://localhost:27017/brokerme';
 var db = mongoose.connect(dbURI);
 var wordSchema = require('./word_schema.js').wordSchema;
 var Words = mongoose.model('Words', wordSchema);
