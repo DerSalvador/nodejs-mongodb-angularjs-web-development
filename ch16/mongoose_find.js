@@ -37,8 +37,23 @@ portfinder.getPort({
    } else {console.log("Port not free " + port);}
 });
 
+options = {
+  reconnectTries: Number.MAX_VALUE,
+  reconnectInterval: 500,
+  loggerLevel: 'debug',
+  connectTimeoutMS: 360000,
+  socketTimeoutMS: 360000,
+  keepAlive: true,
+  poolSize: 30,
+  autoReconnect: true  
+  //validateOptions: true,
+  //rejectUnauthorized: false,
+  //checkServerIdentity: true,
+  //connectWithNoPrimary: true,
+  //domainsEnabled: true
+}
 var mongoose = require('mongoose');
-const dbURI = 'mongodb://localhost:27017/brokerme';
+const dbURI = 'mongodb://my-nginx.192.168.99.100.xip.io/mongodb';
 var db = mongoose.connect(dbURI);
 var wordSchema = require('./word_schema.js').wordSchema;
 var Words = mongoose.model('Words', wordSchema);
@@ -47,7 +62,7 @@ setTimeout(function(){
 
   mongoose.disconnect();
   process.exit(1);
-}, 10000);
+}, 3600000);
 // CONNECTION EVENTS
 // When successfully connected
 mongoose.connection.on('connected', function () {  
